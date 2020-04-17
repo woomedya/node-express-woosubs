@@ -1,8 +1,4 @@
 const config = require('./config');
-const woosubsRouter = require('./src/routers/woosubs');
-const woosubsRepo = require('./src/repositories/woosubs');
-const subsModel = require('./src/repositories/models/subs');
-const skusModel = require('./src/repositories/models/skus');
 const woocontent = require('woo-utilities/mongoose-woocontent');
 const authToken = require('woo-utilities/authTokenHandler');
 
@@ -26,13 +22,13 @@ const init = ({
 module.exports = {
     init,
     router: {
-        woosubs: woosubsRouter
+        woosubs: () => require('./src/routers/woosubs')
     },
     repository: {
-        woosubs: woosubsRepo
+        woosubs: () => require('./src/repositories/woosubs')
     },
     model: {
-        subs: subsModel,
-        skus: skusModel
+        subs: () => require('./src/repositories/models/subs'),
+        skus: () => require('./src/repositories/models/skus')
     }
 }
