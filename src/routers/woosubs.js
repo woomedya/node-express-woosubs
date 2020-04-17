@@ -8,12 +8,11 @@ const router = AsyncRouter();
 
 router.post('/itemsubs', authToken.handler(token.ITEM_SUBS), async (req, res) => {
     var os = req.body.os;
-    var data = {};
-    data[os] = [];
+    var data = [];
 
     var subs = await woosubsRepo.getSubItems();
     if (subs)
-        data[os] = subs.content[os] || [];
+        data = subs.content[os] || [];
 
     res.send(returnModel({
         data: data
@@ -22,12 +21,11 @@ router.post('/itemsubs', authToken.handler(token.ITEM_SUBS), async (req, res) =>
 
 router.post('/itemskus', authToken.handler(token.ITEM_SKUS), async (req, res) => {
     var os = req.body.os;
-    var data = {};
-    data[os] = [];
+    var data = [];
 
     var skus = await woosubsRepo.getSkuItems();
     if (skus)
-        data[os] = skus.content[os] || [];
+        data = skus.content[os] || [];
 
     res.send(returnModel({
         data: data
